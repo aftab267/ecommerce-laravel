@@ -14,7 +14,8 @@ class categorycontroller extends Controller
      */
     public function index()
     {
-
+        $categories=category::all();
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -39,13 +40,14 @@ class categorycontroller extends Controller
         $category->id=$request->category;
         $category->name=$request->name;
         $category->description=$request->description;
-        if($request->hasfile('image')){
+        $category->image=$request->image->store('category');
+        /*if($request->hasfile('image')){
             $file=$request->file('image');
             $extension=$file->GetClientOriginalExtension();
             $filename=time().'.'.$extension;
             $file->move('category',$filename);
             $category->image=$filename;
-        }
+        }*/
         $category->save();
         return redirect()->back()->with('message','Category created Successfully');
     }

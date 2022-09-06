@@ -12,13 +12,29 @@
 
 
 <div class="row-fluid sortable">
+
 <div class="box span12">
+
+
     <div class="box-header" data-original-title>
+        <p class="alert-success">
+            @php
+            $message=Session::get('message');
+            if($message){
+                echo "$message";
+                Session::put('message',null);
+            }
+            @endphp
+       </p>
+
+
         <h2><i class="halflings-icon edit"></i><span class="break"></span>Add Category</h2>
 
     </div>
 
+
     <div class="box-content">
+
         <form class="form-horizontal" action="{{ url('/categories/') }}" method="post" enctype="multipart/form-data">
             @csrf
             <fieldset>
